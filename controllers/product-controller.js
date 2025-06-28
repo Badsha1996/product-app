@@ -4,13 +4,13 @@ const Product = require("../models/product");
 const getProduct = async (req, res) => {
   try {
     const allProducts = await Product.find();
-    const { userId, email, role } = req.userInfo;
+    // const { userId, email, role } = req.userInfo;
 
     if (allProducts.length <= 0) {
       res.status(201).send({
         message: "There are no products available",
         success: true,
-        data: [{ userId: userId, email: email, role: role }],
+        data: [],
       });
       return;
     }
@@ -18,7 +18,7 @@ const getProduct = async (req, res) => {
     res.status(201).send({
       message: "All products fetched",
       success: true,
-      data: [...allProducts, { userId: userId, email: email, role: role }],
+      data: [...allProducts],
     });
   } catch (e) {
     getProductError(e, res);
